@@ -12,13 +12,15 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.controllers.utente',
   'beaconApp.controllers.operazioni',
   'beaconApp.controllers.log',
+  'beaconApp.controllers.registra_ibeacon',
+  'beaconApp.filters.io',
   'beaconApp.services.login',
   'beaconApp.services.home',
   'beaconApp.services.utenti',
   'beaconApp.services.beacons',
   'beaconApp.services.dispositivi'
 ]).
-constant("myServer", {
+constant("MY_SERVER", {
 		"url": "http://localhost",
 		"port": "8000"
 });
