@@ -1,0 +1,23 @@
+<md-dialog >
+  <md-toolbar class="md-primary">
+      <center><p class="bianco">{{user.username}}</p></center>
+    </md-toolbar>
+  <md-content class="md-padding">
+    <div layout="column" layout-sm="column">
+      <md-input-container flex>
+        <label for:"name">Nome</label>
+        <input id="name"  data-ng-model="user.firstname">
+      </md-input-container>
+      <md-input-container flex>
+        <label for:"surname">Cognome</label>
+        <input id="surname"  data-ng-model="user.lastname">
+      </md-input-container>
+      <md-select data-ng-model="user.permission">
+        <md-option data-ng-repeat="n in [] | range: 11">{{n}}</md-option>
+      </md-select>
+      <md-checkbox data-ng-model="user.block">Bloccato</md-checkbox>
+      <md-button class="md-raised md-primary" ng-click="editUser(user)">Aggiorna</md-button>
+        <md-button class="md-raised md-primary" ng-click="closeDialog()">Cancella</md-button>
+    </div>
+  </md-content>
+</md-dialog>

@@ -1,0 +1,22 @@
+<md-toolbar class="colortoolbar">
+  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons">menu</i>
+    </md-button>
+    <h2>
+      <span class="gray">Impostazioni</span>
+    </h2>
+  </div>
+</md-toolbar>
+<md-button data-ng-click="halt()">
+  Spegni
+</md-button>
+<md-button data-ng-click="reboot()">
+  Riavvia
+</md-button>
+<md-button data-ng-click="update()">
+  Aggiorna ProximitySystem
+</md-button>
+<md-button data-ng-click="exit()">
+  Stop Proximity System
+</md-button>

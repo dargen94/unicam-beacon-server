@@ -1,0 +1,20 @@
+<md-dialog class="md-padding">
+  <div layout="column" layout-sm="column">
+    <form ng-submit="add()">
+    <md-input-container flex>
+      <label for="name">Nome</label>
+      <input id="name"  data-ng-model="beacon.name" required>
+    </md-input-container>
+    <md-input-container flex>
+      <label for="description">Descrizione</label>
+      <input id="description"  data-ng-model="beacon.description">
+    </md-input-container>
+    <p><strong class="rosso">Uuid:</strong> {{beacon.properties.uuid}}</p>
+    <center><p><strong class="azzurro">Major:</strong> {{beacon.properties.major}}
+      <strong class="arancione">Minor:</strong> {{beacon.properties.minor}}</p>
+      <div  layout="row" layout-align="center center">
+        <md-button class="md-container md-raised" type="submit">Aggiungi</md-button>
+        <md-button class="md-container md-raised" ng-click="closeDialog()">Cancella</md-button>
+      </div>
+    </form>
+    </md-dialog>
