@@ -1,5 +1,6 @@
 var RPI_GPIO = require('rpi-gpio');
 var GPIO = require('../models/gpio');
+var Device = require('../models/device');
 var gpio = {};
 
 gpio.readStatus = function(PIN, callback) {
@@ -17,6 +18,7 @@ gpio.readStatus = function(PIN, callback) {
 gpio.setPin = function(pin, value, callback, environment) {
   console.log("Setting pin "+pin+" to " + value);
   if(environment !== 'development') {
+    debugger;
     RPI_GPIO.write(pin, value, function(err) {
       if (err) {
         console.log("error writing " + err);
@@ -39,9 +41,39 @@ gpio.init = function (environment) {
         }, function(err, result) {
             result.value = value;
             result.save();
+            if(value === false) {
+              Device.find({
+                '_GPIO': result._id
+              })
+              .populate('_Output')
+              .exec(function(err, devices) {
+                for(var i = 0; i<devices.length;i++) {
+                  if(devices[i]._Output !== null) {
+                    GPIO.findOne({
+                      '_id': devices[i]._Output._GPIO
+                    }, function(err, res) {
+                      debugger;
+                      if(res) {
+                        res.value = !res.value;
+                        res.save();
+                        gpio.setPin(res.GPIO, res.value, function() {}, environment);
+                      }
+                    });
+                  }
+                }
+              });
+            }
         });
     });
   }
+  GPIO.update({type: 'output'},
+        {value: false},
+        {multi: true},
+      function(err, numAffected) {});
+  GPIO.update({type: 'input'},
+        {value: true},
+        {multi: true},
+      function(err, numAffected) {});
   GPIO.find(function(err, GPIOs) {
     if(err) {
       console.log(err.errmsg);
